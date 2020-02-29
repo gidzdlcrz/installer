@@ -1,5 +1,5 @@
 #!/bin/bash
-# Cervantes Installer - created and maintained by vHost
+# fenrirmachine Installer - created and maintained by gamingmagic
 # General
 DEV=0
 INSTALLER_VERSION="v1.2.08"
@@ -32,16 +32,16 @@ else
 fi
 
 echo "\033c"
-echo "Welcome to ${BLUE}Cervantes${NC}, an unattended installer by vHost"
+echo "Welcome to ${BLUE}fenrirmachine${NC}, an unattended installer by vHost"
 echo "Version: ${VERSION}\n"
 echo "This script will now begin to install stuff on your system. Please be patient as this could take a while!\n"
 
 
 
-#echo "${BLUE}Step 1/${STEPS}:${NC} Updating your OS"
-#apt-get -qy update > /dev/null
-#apt-get -qy upgrade > /dev/null
-#echo ""
+echo "${BLUE}Step 1/${STEPS}:${NC} Updating your OS"
+apt-get -qy update > /dev/null
+apt-get -qy upgrade > /dev/null
+echo ""
 
 
 
@@ -111,14 +111,14 @@ echo ""
 
 
 echo "${BLUE}Step 8/${STEPS}:${NC} Setting Up Desktop Stuff"
-mkdir -p /usr/share/cervantes/
-cd /usr/share/cervantes/
+mkdir -p /usr/share/fenrirmachine/
+cd /usr/share/fenrirmachine/
 wget -q https://github.com/gamingmagic/unattended-installer/raw/master/files.zip
 unzip -qq files.zip
 cd links
 mkdir -p /home/rathena/Desktop
 cp -R * /home/rathena/Desktop
-cd /usr/share/cervantes/scripts
+cd /usr/share/fenrirmachine/scripts
 chmod +x *
 cd /home/rathena/Desktop
 chmod +x *
@@ -140,9 +140,9 @@ echo ""
 
 
 
-echo "${BLUE}Step 10/${STEPS}:${NC} Installing Cervantes Files"
+echo "${BLUE}Step 10/${STEPS}:${NC} Installing fenrirmachine Files"
 chown -R rathena:rathena /home/rathena
-chown -R rathena:rathena /usr/share/cervantes
+chown -R rathena:rathena /usr/share/fenrirmachine
 cd /home/rathena
 sudo -u rathena sh -c "wget -q https://github.com/gamingmagic/unattended-installer/raw/master/vnc.zip"
 sudo -u rathena sh -c "unzip -qq vnc.zip"
@@ -161,10 +161,10 @@ echo "        <property name=\"brightness\" type=\"empty\"/>" >> /home/rathena/.
 echo "        <property name=\"color1\" type=\"empty\"/>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
 echo "        <property name=\"color2\" type=\"empty\"/>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
 echo "        <property name=\"color-style\" type=\"empty\"/>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-echo "        <property name=\"image-path\" type=\"string\" value=\"/usr/share/cervantes/img/bg.png\"/>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+echo "        <property name=\"image-path\" type=\"string\" value=\"/usr/share/fenrirmachine/img/bg.png\"/>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
 echo "        <property name=\"image-show\" type=\"empty\"/>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
 echo "        <property name=\"last-image\" type=\"empty\"/>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-echo "        <property name=\"last-single-image\" type=\"string\" value=\"/usr/share/cervantes/img/bg.png\"/>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+echo "        <property name=\"last-single-image\" type=\"string\" value=\"/usr/share/fenrirmachine/img/bg.png\"/>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
 echo "      </property>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
 echo "    </property>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
 echo "  </property>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
@@ -185,7 +185,7 @@ chown -R rathena:rathena /home/rathena/
 
 
 echo "${BLUE}Step 11/${STEPS}:${NC} Grabbing rA Source Files"
-sudo -u rathena sh -c "git clone -q ${URL_RAGIT} /home/rathena/Desktop/rAthena/"
+sudo -u rathena sh -c "git clone -q ${URL_RAGIT} /home/Desktop/rAthena/"
 echo ""
 
 
@@ -193,7 +193,7 @@ echo ""
 #echo "${BLUE}Step 12/${STEPS}:${NC} Performing Initial rA Compile"
 #echo "This step will take time.. please be patient"
 #echo "You may see warnings here - this is normal"
-#cd /home/rathena/Desktop/rAthena
+#cd /home/Desktop/rAthena
 #sudo -u rathena sh -c "./configure > /dev/null"
 #sudo -u rathena sh -c "make server > /dev/null"
 #sudo -u rathena sh -c "chmod a+x login-server && chmod a+x char-server && chmod a+x map-server"
@@ -206,22 +206,22 @@ mysqladmin -u root -pragnarok create ragnarok
 mysql -u root -pragnarok -e "CREATE USER ragnarok@localhost IDENTIFIED BY 'princess21';"
 mysql -u root -pragnarok -e "GRANT ALL PRIVILEGES ON ragnarok.* TO 'ragnarok'@'localhost';"
 mysql -u root -pragnarok -e "FLUSH PRIVILEGES;"
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/main.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/logs.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/item_cash_db.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/item_cash_db2.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/item_db.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/item_db2.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/item_db2_re.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/item_db_re.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/mob_db.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/mob_db2.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/mob_db2_re.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/mob_db_re.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/mob_skill_db.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/mob_skill_db2.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/mob_skill_db2_re.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/mob_skill_db_re.sql
+mysql -u root -pragnarok ragnarok  < /home/Desktop/rAthena/sql-files/main.sql
+mysql -u root -pragnarok ragnarok  < /home/Desktop/rAthena/sql-files/logs.sql
+mysql -u root -pragnarok ragnarok  < /home/Desktop/rAthena/sql-files/item_cash_db.sql
+mysql -u root -pragnarok ragnarok  < /home/Desktop/rAthena/sql-files/item_cash_db2.sql
+mysql -u root -pragnarok ragnarok  < /home/Desktop/rAthena/sql-files/item_db.sql
+mysql -u root -pragnarok ragnarok  < /home/Desktop/rAthena/sql-files/item_db2.sql
+mysql -u root -pragnarok ragnarok  < /home/Desktop/rAthena/sql-files/item_db2_re.sql
+mysql -u root -pragnarok ragnarok  < /home/Desktop/rAthena/sql-files/item_db_re.sql
+mysql -u root -pragnarok ragnarok  < /home/Desktop/rAthena/sql-files/mob_db.sql
+mysql -u root -pragnarok ragnarok  < /home/Desktop/rAthena/sql-files/mob_db2.sql
+mysql -u root -pragnarok ragnarok  < /home/Desktop/rAthena/sql-files/mob_db2_re.sql
+mysql -u root -pragnarok ragnarok  < /home/Desktop/rAthena/sql-files/mob_db_re.sql
+mysql -u root -pragnarok ragnarok  < /home/Desktop/rAthena/sql-files/mob_skill_db.sql
+mysql -u root -pragnarok ragnarok  < /home/Desktop/rAthena/sql-files/mob_skill_db2.sql
+mysql -u root -pragnarok ragnarok  < /home/Desktop/rAthena/sql-files/mob_skill_db2_re.sql
+mysql -u root -pragnarok ragnarok  < /home/Desktop/rAthena/sql-files/mob_skill_db_re.sql
 mysql -u root -pragnarok -e "USE ragnarok; UPDATE login SET userid = '${USERID}', user_pass = 'princess21' where sex = 'S';"
 echo ""
 
@@ -231,11 +231,11 @@ echo "${BLUE}Step 14/${STEPS}:${NC} Configuring FluxCP"
 rm /var/www/html/index.html
 git clone -q ${URL_FLUXGIT} /var/www/html/
 cd /var/www/html/
-#wget -q https://vhost.rocks/cervantes_scripts/diff.diff
-#echo "diff --git a/config/application.php b/config/application.php" >> /var/www/html/diff.diff
-#echo "--- a/config/application.php" >> /var/www/html/diff.diff
-#echo "+++ b/config/application.php" >> /var/www/html/diff.diff
-#echo "@@ -3,7 +3,7 @@" >> /var/www/html/diff.diff
+wget -q https://raw.githubusercontent.com/gamingmagic/unattended-installer/master/diff.diff
+echo "diff --git a/config/application.php b/config/application.php" >> /var/www/html/diff.diff
+echo "--- a/config/application.php" >> /var/www/html/diff.diff
+echo "+++ b/config/application.php" >> /var/www/html/diff.diff
+echo "@@ -3,7 +3,7 @@" >> /var/www/html/diff.diff
 echo " // the default, and should be changed as needed." >> /var/www/html/diff.diff
 echo " return array(" >> /var/www/html/diff.diff
 echo " 	'ServerAddress'				=> 'localhost',				// This value is the hostname:port under which Flux runs. (e.g., example.com or example.com:80)" >> /var/www/html/diff.diff
@@ -270,7 +270,7 @@ rm /var/www/html/diff.diff
 usermod -a -G www-data rathena
 chown -R www-data:www-data /var/www/html
 chmod -R 0774 /var/www/html
-ln -s /var/www/html /home/rathena/Desktop/FluxCP
+ln -s /var/www/html /home/Desktop/FluxCP
 echo ""
 
 
@@ -327,7 +327,7 @@ echo "		</aid>" >> /var/www/html/downloads/client/data/clientinfo.xml
 echo "   	</connection>" >> /var/www/html/downloads/client/data/clientinfo.xml
 echo "</clientinfo>" >> /var/www/html/downloads/client/data/clientinfo.xml
 cd /var/www/html/downloads/client/
-#wget -q https://vhost.rocks/cervantes_scripts/roclient.exe
+#wget -q https://vhost.rocks/fenrirmachine_scripts/roclient.exe
 
 # use rsu.pack to create client grf
 
@@ -343,55 +343,55 @@ cd /home/
 
 
 echo "${BLUE}Step 17/${STEPS}:${NC} Preparing auto-config import files"
-echo "//Cervantes\n" >> /home/rathena/Desktop/rAthena/conf/import/char_conf.txt
-echo "userid: ${USERID}" >> /home/rathena/Desktop/rAthena/conf/import/char_conf.txt
-echo "passwd: princess21" >> /home/rathena/Desktop/rAthena/conf/import/char_conf.txt
-echo "char_ip: ${SERVER_IP}" >> /home/rathena/Desktop/rAthena/conf/import/char_conf.txt
+echo "//fenrirmachine\n" >> /home/Desktop/rAthena/conf/import/char_conf.txt
+echo "userid: ${USERID}" >> /home/Desktop/rAthena/conf/import/char_conf.txt
+echo "passwd: princess21" >> /home/Desktop/rAthena/conf/import/char_conf.txt
+echo "char_ip: ${SERVER_IP}" >> /home/Desktop/rAthena/conf/import/char_conf.txt
 
-echo "//Cervantes\n" >> /home/rathena/Desktop/rAthena/conf/import/map_conf.txt
-echo "userid: ${USERID}" >> /home/rathena/Desktop/rAthena/conf/import/map_conf.txt
-echo "passwd: princess21" >> /home/rathena/Desktop/rAthena/conf/import/map_conf.txt
-echo "map_ip: ${SERVER_IP}" >> /home/rathena/Desktop/rAthena/conf/import/map_conf.txt
+echo "//fenrirmachine\n" >> /home/Desktop/rAthena/conf/import/map_conf.txt
+echo "userid: ${USERID}" >> /home/Desktop/rAthena/conf/import/map_conf.txt
+echo "passwd: princess21" >> /home/Desktop/rAthena/conf/import/map_conf.txt
+echo "map_ip: ${SERVER_IP}" >> /home/Desktop/rAthena/conf/import/map_conf.txt
 
-echo "//Cervantes\n" >> /home/rathena/Desktop/rAthena/conf/import/inter_conf.txt
-echo "//use_sql_db: yes" >> /home/rathena/Desktop/rAthena/conf/import/inter_conf.txt
-echo "login_server_pw: princess21" >> /home/rathena/Desktop/rAthena/conf/import/inter_conf.txt
-echo "ipban_db_pw: princess21" >> /home/rathena/Desktop/rAthena/conf/import/inter_conf.txt
-echo "char_server_pw: princess21" >> /home/rathena/Desktop/rAthena/conf/import/inter_conf.txt
-echo "map_server_pw: princess21" >> /home/rathena/Desktop/rAthena/conf/import/inter_conf.txt
-echo "log_db_pw: princess21" >> /home/rathena/Desktop/rAthena/conf/import/inter_conf.txt
+echo "//fenrirmachine\n" >> /home/Desktop/rAthena/conf/import/inter_conf.txt
+echo "//use_sql_db: yes" >> /home/Desktop/rAthena/conf/import/inter_conf.txt
+echo "login_server_pw: princess21" >> /home/Desktop/rAthena/conf/import/inter_conf.txt
+echo "ipban_db_pw: princess21" >> /home/Desktop/rAthena/conf/import/inter_conf.txt
+echo "char_server_pw: princess21" >> /home/Desktop/rAthena/conf/import/inter_conf.txt
+echo "map_server_pw: princess21" >> /home/Desktop/rAthena/conf/import/inter_conf.txt
+echo "log_db_pw: princess21" >> /home/Desktop/rAthena/conf/import/inter_conf.txt
 echo ""
 
-touch /home/rathena/Desktop/Info.txt
-echo "Cervantes\n" >> /home/rathena/Desktop/Info.txt
-echo "Server IP: ${SERVER_IP}\n" >> /home/rathena/Desktop/Info.txt
-echo "-- MySQL --" >> /home/rathena/Desktop/Info.txt
-echo "root password is 'ragnarok', but can only be accessed locally from this system." >> /home/rathena/Desktop/Info.txt
-echo "For all other MySQL uses, please use the following credentials:" >> /home/rathena/Desktop/Info.txt
-echo "User: ragnarok" >> /home/rathena/Desktop/Info.txt
-echo "Password: princess21\n" >> /home/rathena/Desktop/Info.txt
+touch /home/Desktop/Info.txt
+echo "fenrirmachine\n" >> /home/Desktop/Info.txt
+echo "Server IP: ${SERVER_IP}\n" >> /home/Desktop/Info.txt
+echo "-- MySQL --" >> /home/Desktop/Info.txt
+echo "root password is 'ragnarok', but can only be accessed locally from this system." >> /home/Desktop/Info.txt
+echo "For all other MySQL uses, please use the following credentials:" >> /home/Desktop/Info.txt
+echo "User: ragnarok" >> /home/Desktop/Info.txt
+echo "Password: princess21\n" >> /home/Desktop/Info.txt
 
-echo "-- SSH User --" >> /home/rathena/Desktop/Info.txt
-echo "User: rathena" >> /home/rathena/Desktop/Info.txt
-echo "Password: $RATHENAPASS\n" >> /home/rathena/Desktop/Info.txt
+echo "-- SSH User --" >> /home/Desktop/Info.txt
+echo "User: rathena" >> /home/Desktop/Info.txt
+echo "Password: $RATHENAPASS\n" >> /home/Desktop/Info.txt
 
-echo "-- FluxCP --" >> /home/rathena/Desktop/Info.txt
-echo " * Access FluxCP from this server using the browser and going to http://localhost" >> /home/rathena/Desktop/Info.txt
-echo " or" >> /home/rathena/Desktop/Info.txt
-echo " * Access FluxCP from anywhere by browsing to http://${SERVER_IP}/" >> /home/rathena/Desktop/Info.txt
-echo "The Installer Password is the default for FluxCP, which is secretpassword\n" >> /home/rathena/Desktop/Info.txt
+echo "-- FluxCP --" >> /home/Desktop/Info.txt
+echo " * Access FluxCP from this server using the browser and going to http://localhost" >> /home/Desktop/Info.txt
+echo " or" >> /home/Desktop/Info.txt
+echo " * Access FluxCP from anywhere by browsing to http://${SERVER_IP}/" >> /home/Desktop/Info.txt
+echo "The Installer Password is the default for FluxCP, which is secretpassword\n" >> /home/Desktop/Info.txt
 
-echo "-- phpMyAdmin --" >> /home/rathena/Desktop/Info.txt
-echo " * Access phpMyAdmin from this server using the browser and going to http://localhost/phpmyadmin" >> /home/rathena/Desktop/Info.txt
-echo " or" >> /home/rathena/Desktop/Info.txt
-echo " * Access phpMyAdmin from anywhere by browsing to http://${SERVER_IP}/phpmyadmin" >> /home/rathena/Desktop/Info.txt
-echo "Access from root user is disabled, so you will need to login as 'ragnarok' with your MySQL password.\n" >> /home/rathena/Desktop/Info.txt
+echo "-- phpMyAdmin --" >> /home/Desktop/Info.txt
+echo " * Access phpMyAdmin from this server using the browser and going to http://localhost/phpmyadmin" >> /home/Desktop/Info.txt
+echo " or" >> /home/Desktop/Info.txt
+echo " * Access phpMyAdmin from anywhere by browsing to http://${SERVER_IP}/phpmyadmin" >> /home/Desktop/Info.txt
+echo "Access from root user is disabled, so you will need to login as 'ragnarok' with your MySQL password.\n" >> /home/Desktop/Info.txt
 
-echo "-- Full Client --" >> /home/rathena/Desktop/Info.txt
-echo "A full client will be made available to you on your downloads page straight" >> /home/rathena/Desktop/Info.txt
-echo " after completing the FluxCP installation process. This is located at:" >> /home/rathena/Desktop/Info.txt
-echo " * URL: http://${SERVER_IP}/?module=pages&action=content&page=downloads" >> /home/rathena/Desktop/Info.txt
-echo " * Filesystem: FluxCP Desktop Shortcut -> downloads folder" >> /home/rathena/Desktop/Info.txt
+echo "-- Full Client --" >> /home/Desktop/Info.txt
+echo "A full client will be made available to you on your downloads page straight" >> /home/Desktop/Info.txt
+echo " after completing the FluxCP installation process. This is located at:" >> /home/Desktop/Info.txt
+echo " * URL: http://${SERVER_IP}/?module=pages&action=content&page=downloads" >> /home/Desktop/Info.txt
+echo " * Filesystem: FluxCP Desktop Shortcut -> downloads folder" >> /home/Desktop/Info.txt
 
 
 
