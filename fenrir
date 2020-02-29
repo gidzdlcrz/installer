@@ -1,5 +1,5 @@
 #!/bin/bash
-# fenrirmachine Installer - created and maintained by vHost
+# fenrirmachine Installer - created and maintained by gamingmagic
 # General
 DEV=0
 INSTALLER_VERSION="v1.2.08"
@@ -32,7 +32,7 @@ else
 fi
 
 echo "\033c"
-echo "Welcome to ${BLUE}fenrirmachine${NC}, an unattended installer by vHost"
+echo "Welcome to ${BLUE}fenrirmachine${NC}, an unattended installer by gamingmagic"
 echo "Version: ${VERSION}\n"
 echo "This script will now begin to install stuff on your system. Please be patient as this could take a while!\n"
 
@@ -231,11 +231,11 @@ echo "${BLUE}Step 14/${STEPS}:${NC} Configuring FluxCP"
 rm /var/www/html/index.html
 git clone -q ${URL_FLUXGIT} /var/www/html/
 cd /var/www/html/
-#wget -q https://vhost.rocks/fenrirmachine_scripts/diff.diff
-#echo "diff --git a/config/application.php b/config/application.php" >> /var/www/html/diff.diff
-#echo "--- a/config/application.php" >> /var/www/html/diff.diff
-#echo "+++ b/config/application.php" >> /var/www/html/diff.diff
-#echo "@@ -3,7 +3,7 @@" >> /var/www/html/diff.diff
+wget -q https://raw.githubusercontent.com/gamingmagic/unattended-installer/master/diff.diff
+echo "diff --git a/config/application.php b/config/application.php" >> /var/www/html/diff.diff
+echo "--- a/config/application.php" >> /var/www/html/diff.diff
+echo "+++ b/config/application.php" >> /var/www/html/diff.diff
+echo "@@ -3,7 +3,7 @@" >> /var/www/html/diff.diff
 echo " // the default, and should be changed as needed." >> /var/www/html/diff.diff
 echo " return array(" >> /var/www/html/diff.diff
 echo " 	'ServerAddress'				=> 'localhost',				// This value is the hostname:port under which Flux runs. (e.g., example.com or example.com:80)" >> /var/www/html/diff.diff
@@ -327,7 +327,7 @@ echo "		</aid>" >> /var/www/html/downloads/client/data/clientinfo.xml
 echo "   	</connection>" >> /var/www/html/downloads/client/data/clientinfo.xml
 echo "</clientinfo>" >> /var/www/html/downloads/client/data/clientinfo.xml
 cd /var/www/html/downloads/client/
-#wget -q https://vhost.rocks/fenrirmachine_scripts/roclient.exe
+#wget -q https://<url>/fenrirmachine_scripts/roclient.exe
 
 # use rsu.pack to create client grf
 
