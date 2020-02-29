@@ -38,9 +38,9 @@ echo "This script will now begin to install stuff on your system. Please be pati
 
 
 
-echo "${BLUE}Step 1/${STEPS}:${NC} Updating your OS"
-apt-get -qy update > /dev/null
-apt-get -qy upgrade > /dev/null
+echo "${BLUE}Step 1/${STEPS}:${NC} Testing"
+#apt-get -qy update > /dev/null
+#apt-get -qy upgrade > /dev/null
 echo ""
 
 
