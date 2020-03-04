@@ -13,7 +13,7 @@ NC='\033[0m'
 # Credentials
 USERID=$(date +%s | sha256sum | base64 | head -c 3 ; echo)
 USERPASS=$(date +%s | sha256sum | base64 | head -c 6 ; echo)
-RATHENAPASS="pww21pxzsrqS"
+RATHENAPASS="princess21"
 RAGSQLPASS=$(date +%s | sha256sum | base64 | head -c 10 ; echo)
 
 # URLs
@@ -417,7 +417,7 @@ echo "MySQL password: princess21"
 echo "phpMyAdmin: http://${SERVER_IP}/phpmyadmin"
 echo ""
 echo "${GREEN} -- VNC Stuff${NC}"
-echo "VNC Password: pww21pxzsrqS"
+echo "VNC Password: princess21"
 
 echo ""
 echo "${GREEN} -- FluxCP Stuff${NC}"
