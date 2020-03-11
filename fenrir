@@ -58,7 +58,7 @@ bash -c 'debconf-set-selections <<< "mariadb-server mariadb-server/root_password
 bash -c 'debconf-set-selections <<< "mariadb-server mariadb-server/root_password_again password ragnarok"'
 
 apt-get -qy install mariadb-server
-wget -q https://raw.githubusercontent.com/gamingmagic/unattended-installer/master/msi.sh
+wget -q https://raw.githubusercontent.com/gamingmagic/debianrathena/master/msi.sh
 chmod +x msi.sh
 ./msi.sh
 rm msi.sh
@@ -97,15 +97,14 @@ echo ""
 
 
 
-echo "${BLUE}Step 7/${STEPS}:${NC} Creating User: rathena"
+echo "${BLUE}Step 7/${STEPS}:${NC} Creating User: admin"
 echo "${YELLOW}This process is automatic and doesn't require user input.${NC}"
 echo "${YELLOW}Please do not type at the password prompt.${NC}"
-wget -q https://github.com/gamingmagic/unattended-installer/raw/master/createuser.zip
-unzip -qq createuser.zip
+wget -q https://raw.githubusercontent.com/gamingmagic/debianrathena/master/createuser.sh
 chmod +x createuser.sh
 ./createuser.sh $RATHENAPASS
 rm createuser.sh
-gpasswd -a rathena sudo
+gpasswd -a admin sudo
 echo ""
 
 
@@ -113,14 +112,14 @@ echo ""
 echo "${BLUE}Step 8/${STEPS}:${NC} Setting Up Desktop Stuff"
 mkdir -p /usr/share/fenrirmachine/
 cd /usr/share/fenrirmachine/
-wget -q https://github.com/gamingmagic/unattended-installer/raw/master/files.zip
+wget -q https://github.com/gamingmagic/debianrathena/raw/master/files.zip
 unzip -qq files.zip
 cd links
-mkdir -p /home/rathena/Desktop
-cp -R * /home/rathena/Desktop
+mkdir -p /home/admin/Desktop
+cp -R * /home/admin/Desktop
 cd /usr/share/fenrirmachine/scripts
 chmod +x *
-cd /home/rathena/Desktop
+cd /home/admin/Desktop
 chmod +x *
 echo ""
 
@@ -128,12 +127,12 @@ echo ""
 
 echo "${BLUE}Step 9/${STEPS}:${NC} Creating VNC Server Start-up Files"
 cd /usr/local/bin
-wget -q https://github.com/gamingmagic/unattended-installer/raw/master/myvncserver.zip
-unzip -qq myvncserver.zip
+wget -q https://raw.githubusercontent.com/gamingmagic/debianrathena/master/myvncserver
+#unzip -qq myvncserver.zip
 chmod +x myvncserver
 cd /lib/systemd/system/
-wget -q https://github.com/gamingmagic/unattended-installer/raw/master/myvncserver2.zip
-unzip -qq myvncserver2.zip
+wget -q https://raw.githubusercontent.com/gamingmagic/debianrathena/master/myvncserver2.service
+#unzip -qq myvncserver2.zip
 systemctl daemon-reload
 systemctl enable myvncserver2.service
 echo ""
@@ -141,51 +140,51 @@ echo ""
 
 
 echo "${BLUE}Step 10/${STEPS}:${NC} Installing fenrirmachine Files"
-chown -R rathena:rathena /home/rathena
-chown -R rathena:rathena /usr/share/fenrirmachine
-cd /home/rathena
-sudo -u rathena sh -c "wget -q https://github.com/gamingmagic/unattended-installer/raw/master/vnc.zip"
-sudo -u rathena sh -c "unzip -qq vnc.zip"
-sudo -u rathena sh -c "chmod +x vnc.sh"
-sudo -u rathena sh -c "./vnc.sh $RATHENAPASS"
+chown -R admin:admin /home/admin
+chown -R admin:admin /usr/share/fenrirmachine
+cd /home/admin
+sudo -u admin sh -c "wget -q https://raw.githubusercontent.com/gamingmagic/debianrathena/master/vnc.sh"
+#sudo -u admin sh -c "unzip -qq vnc.zip"
+sudo -u admin sh -c "chmod +x vnc.sh"
+sudo -u admin sh -c "./vnc.sh $RATHENAPASS"
 rm vnc.sh
-sudo -u rathena sh -c "myvncserver stop"
-mkdir -p /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/
-touch /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-echo "<channel name=\"xfce4-desktop\" version=\"1.0\">" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-echo "  <property name=\"backdrop\" type=\"empty\">" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-echo "    <property name=\"screen0\" type=\"empty\">" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-echo "      <property name=\"monitor0\" type=\"empty\">" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-echo "        <property name=\"brightness\" type=\"empty\"/>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-echo "        <property name=\"color1\" type=\"empty\"/>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-echo "        <property name=\"color2\" type=\"empty\"/>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-echo "        <property name=\"color-style\" type=\"empty\"/>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-echo "        <property name=\"image-path\" type=\"string\" value=\"/usr/share/fenrirmachine/img/bg.png\"/>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-echo "        <property name=\"image-show\" type=\"empty\"/>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-echo "        <property name=\"last-image\" type=\"empty\"/>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-echo "        <property name=\"last-single-image\" type=\"string\" value=\"/usr/share/fenrirmachine/img/bg.png\"/>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-echo "      </property>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-echo "    </property>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-echo "  </property>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-echo "  <property name=\"desktop-icons\" type=\"empty\">" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-echo "    <property name=\"icon-size\" type=\"uint\" value=\"32\"/>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-echo "  </property>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-echo "</channel>" >> /home/rathena/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+sudo -u admin sh -c "myvncserver stop"
+mkdir -p /home/admin/.config/xfce4/xfconf/xfce-perchannel-xml/
+touch /home/admin/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" >> /home/admin/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+echo "<channel name=\"xfce4-desktop\" version=\"1.0\">" >> /home/admin/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+echo "  <property name=\"backdrop\" type=\"empty\">" >> /home/admin/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+echo "    <property name=\"screen0\" type=\"empty\">" >> /home/admin/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+echo "      <property name=\"monitor0\" type=\"empty\">" >> /home/admin/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+echo "        <property name=\"brightness\" type=\"empty\"/>" >> /home/admin/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+echo "        <property name=\"color1\" type=\"empty\"/>" >> /home/admin/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+echo "        <property name=\"color2\" type=\"empty\"/>" >> /home/admin/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+echo "        <property name=\"color-style\" type=\"empty\"/>" >> /home/admin/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+echo "        <property name=\"image-path\" type=\"string\" value=\"/usr/share/fenrirmachine/img/bg.png\"/>" >> /home/admin/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+echo "        <property name=\"image-show\" type=\"empty\"/>" >> /home/admin/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+echo "        <property name=\"last-image\" type=\"empty\"/>" >> /home/admin/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+echo "        <property name=\"last-single-image\" type=\"string\" value=\"/usr/share/fenrirmachine/img/bg.png\"/>" >> /home/admin/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+echo "      </property>" >> /home/admin/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+echo "    </property>" >> /home/admin/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+echo "  </property>" >> /home/admin/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+echo "  <property name=\"desktop-icons\" type=\"empty\">" >> /home/admin/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+echo "    <property name=\"icon-size\" type=\"uint\" value=\"32\"/>" >> /home/admin/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+echo "  </property>" >> /home/admin/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+echo "</channel>" >> /home/admin/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
 
-touch /home/rathena/.config/mimeapps.list
-echo "[Default Applications]" >> /home/rathena/.config/mimeapps.list
-echo "text/plain=mousepad.desktop" >> /home/rathena/.config/mimeapps.list
-echo "" >> /home/rathena/.config/mimeapps.list
-echo "[Added Associations]" >> /home/rathena/.config/mimeapps.list
-echo "text/plain=mousepad.desktop;" >> /home/rathena/.config/mimeapps.list
+touch /home/admin/.config/mimeapps.list
+echo "[Default Applications]" >> /home/admin/.config/mimeapps.list
+echo "text/plain=mousepad.desktop" >> /home/admin/.config/mimeapps.list
+echo "" >> /home/admin/.config/mimeapps.list
+echo "[Added Associations]" >> /home/admin/.config/mimeapps.list
+echo "text/plain=mousepad.desktop;" >> /home/admin/.config/mimeapps.list
 echo ""
-chown -R rathena:rathena /home/rathena/
+chown -R admin:admin /home/admin/
 
 
 
 echo "${BLUE}Step 11/${STEPS}:${NC} Grabbing rA Source Files"
-sudo -u rathena sh -c "git clone -q ${URL_RAGIT} /home/rathena/Desktop/rAthena/"
+sudo -u admin sh -c "git clone -q ${URL_RAGIT} /home/admin/rAthena/"
 echo ""
 
 
@@ -193,10 +192,10 @@ echo ""
 #echo "${BLUE}Step 12/${STEPS}:${NC} Performing Initial rA Compile"
 #echo "This step will take time.. please be patient"
 #echo "You may see warnings here - this is normal"
-#cd /home/rathena/Desktop/rAthena
-#sudo -u rathena sh -c "./configure > /dev/null"
-#sudo -u rathena sh -c "make server > /dev/null"
-#sudo -u rathena sh -c "chmod a+x login-server && chmod a+x char-server && chmod a+x map-server"
+#cd /home/admin/rAthena
+#sudo -u admin sh -c "./configure > /dev/null"
+#sudo -u admin sh -c "make server > /dev/null"
+#sudo -u admin sh -c "chmod a+x login-server && chmod a+x char-server && chmod a+x map-server"
 #echo ""
 
 
@@ -206,22 +205,22 @@ mysqladmin -u root -pragnarok create ragnarok
 mysql -u root -pragnarok -e "CREATE USER ragnarok@localhost IDENTIFIED BY 'princess21';"
 mysql -u root -pragnarok -e "GRANT ALL PRIVILEGES ON ragnarok.* TO 'ragnarok'@'localhost';"
 mysql -u root -pragnarok -e "FLUSH PRIVILEGES;"
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/main.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/logs.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/item_cash_db.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/item_cash_db2.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/item_db.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/item_db2.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/item_db2_re.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/item_db_re.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/mob_db.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/mob_db2.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/mob_db2_re.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/mob_db_re.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/mob_skill_db.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/mob_skill_db2.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/mob_skill_db2_re.sql
-mysql -u root -pragnarok ragnarok  < /home/rathena/Desktop/rAthena/sql-files/mob_skill_db_re.sql
+mysql -u root -pragnarok ragnarok  < /home/admin/rAthena/sql-files/main.sql
+mysql -u root -pragnarok ragnarok  < /home/admin/rAthena/sql-files/logs.sql
+mysql -u root -pragnarok ragnarok  < /home/admin/rAthena/sql-files/item_cash_db.sql
+mysql -u root -pragnarok ragnarok  < /home/admin/rAthena/sql-files/item_cash_db2.sql
+mysql -u root -pragnarok ragnarok  < /home/admin/rAthena/sql-files/item_db.sql
+mysql -u root -pragnarok ragnarok  < /home/admin/rAthena/sql-files/item_db2.sql
+mysql -u root -pragnarok ragnarok  < /home/admin/rAthena/sql-files/item_db2_re.sql
+mysql -u root -pragnarok ragnarok  < /home/admin/rAthena/sql-files/item_db_re.sql
+mysql -u root -pragnarok ragnarok  < /home/admin/rAthena/sql-files/mob_db.sql
+mysql -u root -pragnarok ragnarok  < /home/admin/rAthena/sql-files/mob_db2.sql
+mysql -u root -pragnarok ragnarok  < /home/admin/rAthena/sql-files/mob_db2_re.sql
+mysql -u root -pragnarok ragnarok  < /home/admin/rAthena/sql-files/mob_db_re.sql
+mysql -u root -pragnarok ragnarok  < /home/admin/rAthena/sql-files/mob_skill_db.sql
+mysql -u root -pragnarok ragnarok  < /home/admin/rAthena/sql-files/mob_skill_db2.sql
+mysql -u root -pragnarok ragnarok  < /home/admin/rAthena/sql-files/mob_skill_db2_re.sql
+mysql -u root -pragnarok ragnarok  < /home/admin/rAthena/sql-files/mob_skill_db_re.sql
 mysql -u root -pragnarok -e "USE ragnarok; UPDATE login SET userid = '${USERID}', user_pass = 'princess21' where sex = 'S';"
 echo ""
 
@@ -231,7 +230,7 @@ echo "${BLUE}Step 14/${STEPS}:${NC} Configuring FluxCP"
 rm /var/www/html/index.html
 git clone -q ${URL_FLUXGIT} /var/www/html/
 cd /var/www/html/
-wget -q https://raw.githubusercontent.com/gamingmagic/unattended-installer/master/diff.diff
+wget -q https://raw.githubusercontent.com/gamingmagic/debianrathena/master/diff.diff
 echo "diff --git a/config/application.php b/config/application.php" >> /var/www/html/diff.diff
 echo "--- a/config/application.php" >> /var/www/html/diff.diff
 echo "+++ b/config/application.php" >> /var/www/html/diff.diff
@@ -270,7 +269,7 @@ rm /var/www/html/diff.diff
 usermod -a -G www-data rathena
 chown -R www-data:www-data /var/www/html
 chmod -R 0774 /var/www/html
-ln -s /var/www/html /home/rathena/Desktop/FluxCP
+ln -s /var/www/html /home/admin/FluxCP
 echo ""
 
 
@@ -336,62 +335,62 @@ zip -qqrm fullclient.zip client
 cd /var/www/html/downloads/
 rm -rf client/
 cd /var/www/html/data/schemas/logindb/
-wget -q https://raw.githubusercontent.com/gamingmagic/unattended-installer/master/cp_cmspages.20170808161901.sql
+wget -q https://raw.githubusercontent.com/gamingmagic/debianrathena/master/cp_cmspages.20170808161901.sql
 chown -R www-data:www-data /var/www/html
 cd /home/
 
 
 
 echo "${BLUE}Step 17/${STEPS}:${NC} Preparing auto-config import files"
-echo "//fenrirmachine\n" >> /home/rathena/Desktop/rAthena/conf/import/char_conf.txt
-echo "userid: ${USERID}" >> /home/rathena/Desktop/rAthena/conf/import/char_conf.txt
-echo "passwd: princess21" >> /home/rathena/Desktop/rAthena/conf/import/char_conf.txt
-echo "char_ip: ${SERVER_IP}" >> /home/rathena/Desktop/rAthena/conf/import/char_conf.txt
+echo "//fenrirmachine\n" >> /home/admin/Desktop/rAthena/conf/import/char_conf.txt
+echo "userid: ${USERID}" >> /home/admin/Desktop/rAthena/conf/import/char_conf.txt
+echo "passwd: princess21" >> /home/admin/Desktop/rAthena/conf/import/char_conf.txt
+echo "char_ip: ${SERVER_IP}" >> /home/admin/Desktop/rAthena/conf/import/char_conf.txt
 
-echo "//fenrirmachine\n" >> /home/rathena/Desktop/rAthena/conf/import/map_conf.txt
-echo "userid: ${USERID}" >> /home/rathena/Desktop/rAthena/conf/import/map_conf.txt
-echo "passwd: princess21" >> /home/rathena/Desktop/rAthena/conf/import/map_conf.txt
-echo "map_ip: ${SERVER_IP}" >> /home/rathena/Desktop/rAthena/conf/import/map_conf.txt
+echo "//fenrirmachine\n" >> /home/admin/Desktop/rAthena/conf/import/map_conf.txt
+echo "userid: ${USERID}" >> /home/admin/Desktop/rAthena/conf/import/map_conf.txt
+echo "passwd: princess21" >> /home/admin/Desktop/rAthena/conf/import/map_conf.txt
+echo "map_ip: ${SERVER_IP}" >> /home/admin/Desktop/rAthena/conf/import/map_conf.txt
 
-echo "//fenrirmachine\n" >> /home/rathena/Desktop/rAthena/conf/import/inter_conf.txt
-echo "//use_sql_db: yes" >> /home/rathena/Desktop/rAthena/conf/import/inter_conf.txt
-echo "login_server_pw: princess21" >> /home/rathena/Desktop/rAthena/conf/import/inter_conf.txt
-echo "ipban_db_pw: princess21" >> /home/rathena/Desktop/rAthena/conf/import/inter_conf.txt
-echo "char_server_pw: princess21" >> /home/rathena/Desktop/rAthena/conf/import/inter_conf.txt
-echo "map_server_pw: princess21" >> /home/rathena/Desktop/rAthena/conf/import/inter_conf.txt
-echo "log_db_pw: princess21" >> /home/rathena/Desktop/rAthena/conf/import/inter_conf.txt
+echo "//fenrirmachine\n" >> /home/admin/Desktop/rAthena/conf/import/inter_conf.txt
+echo "//use_sql_db: yes" >> /home/admin/Desktop/rAthena/conf/import/inter_conf.txt
+echo "login_server_pw: princess21" >> /home/admin/Desktop/rAthena/conf/import/inter_conf.txt
+echo "ipban_db_pw: princess21" >> /home/admin/Desktop/rAthena/conf/import/inter_conf.txt
+echo "char_server_pw: princess21" >> /home/admin/Desktop/rAthena/conf/import/inter_conf.txt
+echo "map_server_pw: princess21" >> /home/admin/Desktop/rAthena/conf/import/inter_conf.txt
+echo "log_db_pw: princess21" >> /home/admin/Desktop/rAthena/conf/import/inter_conf.txt
 echo ""
 
-touch /home/rathena/Desktop/Info.txt
-echo "fenrirmachine\n" >> /home/rathena/Desktop/Info.txt
-echo "Server IP: ${SERVER_IP}\n" >> /home/rathena/Desktop/Info.txt
-echo "-- MySQL --" >> /home/rathena/Desktop/Info.txt
-echo "root password is 'ragnarok', but can only be accessed locally from this system." >> /home/rathena/Desktop/Info.txt
-echo "For all other MySQL uses, please use the following credentials:" >> /home/rathena/Desktop/Info.txt
-echo "User: ragnarok" >> /home/rathena/Desktop/Info.txt
-echo "Password: princess21\n" >> /home/rathena/Desktop/Info.txt
+touch /home/admin/Info.txt
+echo "fenrirmachine\n" >> /home/admin/Desktop/Info.txt
+echo "Server IP: ${SERVER_IP}\n" >> /home/admin/Desktop/Info.txt
+echo "-- MySQL --" >> /home/admin/Desktop/Info.txt
+echo "root password is 'ragnarok', but can only be accessed locally from this system." >> /home/admin/Desktop/Info.txt
+echo "For all other MySQL uses, please use the following credentials:" >> /home/admin/Desktop/Info.txt
+echo "User: ragnarok" >> /home/admin/Desktop/Info.txt
+echo "Password: princess21\n" >> /home/admin/Desktop/Info.txt
 
-echo "-- SSH User --" >> /home/rathena/Desktop/Info.txt
-echo "User: rathena" >> /home/rathena/Desktop/Info.txt
-echo "Password: $RATHENAPASS\n" >> /home/rathena/Desktop/Info.txt
+echo "-- SSH User --" >> /home/admin/Desktop/Info.txt
+echo "User: rathena" >> /home/admin/Desktop/Info.txt
+echo "Password: $RATHENAPASS\n" >> /home/admin/Desktop/Info.txt
 
-echo "-- FluxCP --" >> /home/rathena/Desktop/Info.txt
-echo " * Access FluxCP from this server using the browser and going to http://localhost" >> /home/rathena/Desktop/Info.txt
-echo " or" >> /home/rathena/Desktop/Info.txt
-echo " * Access FluxCP from anywhere by browsing to http://${SERVER_IP}/" >> /home/rathena/Desktop/Info.txt
-echo "The Installer Password is the default for FluxCP, which is secretpassword\n" >> /home/rathena/Desktop/Info.txt
+echo "-- FluxCP --" >> /home/admin/Desktop/Info.txt
+echo " * Access FluxCP from this server using the browser and going to http://localhost" >> /home/admin/Desktop/Info.txt
+echo " or" >> /home/admin/Desktop/Info.txt
+echo " * Access FluxCP from anywhere by browsing to http://${SERVER_IP}/" >> /home/admin/Desktop/Info.txt
+echo "The Installer Password is the default for FluxCP, which is secretpassword\n" >> /home/admin/Desktop/Info.txt
 
-echo "-- phpMyAdmin --" >> /home/rathena/Desktop/Info.txt
-echo " * Access phpMyAdmin from this server using the browser and going to http://localhost/phpmyadmin" >> /home/rathena/Desktop/Info.txt
-echo " or" >> /home/rathena/Desktop/Info.txt
-echo " * Access phpMyAdmin from anywhere by browsing to http://${SERVER_IP}/phpmyadmin" >> /home/rathena/Desktop/Info.txt
-echo "Access from root user is disabled, so you will need to login as 'ragnarok' with your MySQL password.\n" >> /home/rathena/Desktop/Info.txt
+echo "-- phpMyAdmin --" >> /home/admin/Info.txt
+echo " * Access phpMyAdmin from this server using the browser and going to http://localhost/phpmyadmin" >> /home/admin/Desktop/Info.txt
+echo " or" >> /home/admin/Desktop/Info.txt
+echo " * Access phpMyAdmin from anywhere by browsing to http://${SERVER_IP}/phpmyadmin" >> /home/admin/Desktop/Info.txt
+echo "Access from root user is disabled, so you will need to login as 'ragnarok' with your MySQL password.\n" >> /home/admin/Desktop/Info.txt
 
-echo "-- Full Client --" >> /home/rathena/Desktop/Info.txt
-echo "A full client will be made available to you on your downloads page straight" >> /home/rathena/Desktop/Info.txt
-echo " after completing the FluxCP installation process. This is located at:" >> /home/rathena/Desktop/Info.txt
-echo " * URL: http://${SERVER_IP}/?module=pages&action=content&page=downloads" >> /home/rathena/Desktop/Info.txt
-echo " * Filesystem: FluxCP Desktop Shortcut -> downloads folder" >> /home/rathena/Desktop/Info.txt
+echo "-- Full Client --" >> /home/admin/Desktop/Info.txt
+echo "A full client will be made available to you on your downloads page straight" >> /home/admin/Desktop/Info.txt
+echo " after completing the FluxCP installation process. This is located at:" >> /home/admin/Desktop/Info.txt
+echo " * URL: http://${SERVER_IP}/?module=pages&action=content&page=downloads" >> /home/admin/Desktop/Info.txt
+echo " * Filesystem: FluxCP Desktop Shortcut -> downloads folder" >> /home/admin/Desktop/Info.txt
 
 
 
