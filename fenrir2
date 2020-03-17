@@ -268,8 +268,8 @@ echo " 			'Timezone'   => null // Possible values is as described in the comment
 git apply diff.diff
 rm /home/admin/web/fenrirserver.com/public_html/diff.diff
 usermod -a -G www-data rathena
-chown -R www-data:www-data /home/admin/web/fenrirserver.com/public_html/html
-chmod -R 0774 /home/admin/web/fenrirserver.com/public_html/html
+chown -R www-data:www-data /home/admin/web/fenrirserver.com/public_html
+chmod -R 0774 /home/admin/web/fenrirserver.com/public_html
 ln -s /home/admin/web/fenrirserver.com/public_html /home/rathena/Desktop/FluxCP
 echo ""
 
