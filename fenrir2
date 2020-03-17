@@ -228,68 +228,68 @@ echo ""
 
 
 echo "${BLUE}Step 14/${STEPS}:${NC} Configuring FluxCP"
-rm /home/admin/web/fenrirserver.com/public.html/index.html
-git clone -q ${URL_FLUXGIT} /home/admin/web/fenrirserver.com/public.html/
-cd /home/admin/web/fenrirserver.com/public.html/
+rm /home/admin/web/fenrirserver.com/public_html/index.html
+git clone -q ${URL_FLUXGIT} /home/admin/web/fenrirserver.com/public_html/
+cd /home/admin/web/fenrirserver.com/public_html/
 wget -q https://raw.githubusercontent.com/gamingmagic/unattended-installer/master/diff.diff
-echo "diff --git a/config/application.php b/config/application.php" >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo "--- a/config/application.php" >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo "+++ b/config/application.php" >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo "@@ -3,7 +3,7 @@" >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo " // the default, and should be changed as needed." >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo " return array(" >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo " 	'ServerAddress'				=> 'localhost',				// This value is the hostname:port under which Flux runs. (e.g., example.com or example.com:80)" >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo "-	'BaseURI'					=> 'fluxcp',						// The base URI is the base web root on which your application lies." >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo "+	'BaseURI'					=> '',						// The base URI is the base web root on which your application lies." >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo " 	'InstallerPassword'			=> 'secretpassword',		// Installer/updater password." >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo " 	'RequireOwnership'			=> true,					// Require the executing user to be owner of the FLUX_ROOT/data/ directory tree? (Better for security)" >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo " 															// WARNING: This will be mostly IGNORED on non-POSIX-compliant OSes (e.g. Windows)." >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo "diff --git a/config/servers.php b/config/servers.php" >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo "--- a/config/servers.php" >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo "+++ b/config/servers.php" >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo "@@ -15,7 +15,7 @@ return array(" >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo " 				// -- It specifies the encoding to convert your MySQL data to on the website (most likely needs to be utf8)" >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo " 			'Hostname'   => '127.0.0.1'," >> //home/admin/web/fenrirserver.com/public.html/diff.diff
-echo " 			'Username'   => 'ragnarok'," >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo "-			'Password'   => 'ragnarok'," >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo "+			'Password'   => 'princess21'," >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo " 			'Database'   => 'ragnarok'," >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo " 			'Persistent' => true," >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo " 			'Timezone'   => null // Example: '+0:00' is UTC." >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo "@@ -36,7 +36,7 @@ return array(" >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo " 				// -- It specifies the encoding to convert your MySQL data to on the website (most likely needs to be utf8)" >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo " 			'Hostname'   => '127.0.0.1'," >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo " 			'Username'   => 'ragnarok'," >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo "-			'Password'   => 'ragnarok'," >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo "+			'Password'   => 'princess21'," >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo " 			'Database'   => 'ragnarok'," >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo " 			'Persistent' => true," >> /home/admin/web/fenrirserver.com/public.html/diff.diff
-echo " 			'Timezone'   => null // Possible values is as described in the comment in DbConfig." >> /home/admin/web/fenrirserver.com/public.html/diff.diff
+echo "diff --git a/config/application.php b/config/application.php" >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo "--- a/config/application.php" >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo "+++ b/config/application.php" >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo "@@ -3,7 +3,7 @@" >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo " // the default, and should be changed as needed." >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo " return array(" >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo " 	'ServerAddress'				=> 'localhost',				// This value is the hostname:port under which Flux runs. (e.g., example.com or example.com:80)" >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo "-	'BaseURI'					=> 'fluxcp',						// The base URI is the base web root on which your application lies." >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo "+	'BaseURI'					=> '',						// The base URI is the base web root on which your application lies." >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo " 	'InstallerPassword'			=> 'secretpassword',		// Installer/updater password." >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo " 	'RequireOwnership'			=> true,					// Require the executing user to be owner of the FLUX_ROOT/data/ directory tree? (Better for security)" >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo " 															// WARNING: This will be mostly IGNORED on non-POSIX-compliant OSes (e.g. Windows)." >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo "diff --git a/config/servers.php b/config/servers.php" >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo "--- a/config/servers.php" >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo "+++ b/config/servers.php" >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo "@@ -15,7 +15,7 @@ return array(" >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo " 				// -- It specifies the encoding to convert your MySQL data to on the website (most likely needs to be utf8)" >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo " 			'Hostname'   => '127.0.0.1'," >> //home/admin/web/fenrirserver.com/public_html/diff.diff
+echo " 			'Username'   => 'ragnarok'," >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo "-			'Password'   => 'ragnarok'," >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo "+			'Password'   => 'princess21'," >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo " 			'Database'   => 'ragnarok'," >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo " 			'Persistent' => true," >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo " 			'Timezone'   => null // Example: '+0:00' is UTC." >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo "@@ -36,7 +36,7 @@ return array(" >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo " 				// -- It specifies the encoding to convert your MySQL data to on the website (most likely needs to be utf8)" >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo " 			'Hostname'   => '127.0.0.1'," >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo " 			'Username'   => 'ragnarok'," >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo "-			'Password'   => 'ragnarok'," >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo "+			'Password'   => 'princess21'," >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo " 			'Database'   => 'ragnarok'," >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo " 			'Persistent' => true," >> /home/admin/web/fenrirserver.com/public_html/diff.diff
+echo " 			'Timezone'   => null // Possible values is as described in the comment in DbConfig." >> /home/admin/web/fenrirserver.com/public_html/diff.diff
 git apply diff.diff
-rm /home/admin/web/fenrirserver.com/public.html/diff.diff
+rm /home/admin/web/fenrirserver.com/public_html/diff.diff
 usermod -a -G www-data rathena
-chown -R www-data:www-data /home/admin/web/fenrirserver.com/public.html/html
-chmod -R 0774 /home/admin/web/fenrirserver.com/public.html/html
-ln -s /home/admin/web/fenrirserver.com/public.html /home/rathena/Desktop/FluxCP
+chown -R www-data:www-data /home/admin/web/fenrirserver.com/public_html/html
+chmod -R 0774 /home/admin/web/fenrirserver.com/public_html/html
+ln -s /home/admin/web/fenrirserver.com/public_html /home/rathena/Desktop/FluxCP
 echo ""
 
 
 
 echo "${BLUE}Step 15/${STEPS}:${NC} Installing phpMyAdmin"
 
-
+cd /home/admin/web/fenrirserver.com/public_html/phpmyadmin/
 mv config.sample.inc.php config.inc.php
-echo "<?php" > /home/admin/web/fenrirserver.com/public.html/phpmyadmin/config.inc.php
+echo "<?php" > /home/admin/web/fenrirserver.com/public_html/phpmyadmin/config.inc.php
 BLOWFISH=$(date +%s | sha256sum | base64 | head -c 32 ; echo)
-echo "\$cfg['blowfish_secret'] = '${BLOWFISH}';" >> /home/admin/web/fenrirserver.com/public.html/config.inc.php
-echo "\$i=0;" >> /home/admin/web/fenrirserver.com/public.html/phpmyadmin/config.inc.php
-echo "\$i++;" >> /home/admin/web/fenrirserver.com/public.html/phpmyadmin/config.inc.php
-echo "\$cfg['Servers'][\$i]['host'] = 'localhost';" >> /home/admin/web/fenrirserver.com/public.html/config.inc.php
-echo "\$cfg['Servers'][\$i]['AllowRoot'] = false;" >> /home/admin/web/fenrirserver.com/public.html/config.inc.php
-echo "\$cfg['Servers'][\$i]['AllowNoPassword'] = false;" >> /home/admin/web/fenrirserver.com/public.html/config.inc.php
-echo "\$cfg['Servers'][\$i]['auth_type']     = 'cookie';" >> /home/admin/web/fenrirserver.com/public.html/config.inc.php
-chown -R www-data:www-data /home/admin/web/fenrirserver.com/public.html
-chmod 0660 /home/admin/web/fenrirserver.com/public.html/config.inc.php
+echo "\$cfg['blowfish_secret'] = '${BLOWFISH}';" >> /home/admin/web/fenrirserver.com/public_html/config.inc.php
+echo "\$i=0;" >> /home/admin/web/fenrirserver.com/public_html/phpmyadmin/config.inc.php
+echo "\$i++;" >> /home/admin/web/fenrirserver.com/public_html/phpmyadmin/config.inc.php
+echo "\$cfg['Servers'][\$i]['host'] = 'localhost';" >> /home/admin/web/fenrirserver.com/public_html/config.inc.php
+echo "\$cfg['Servers'][\$i]['AllowRoot'] = false;" >> /home/admin/web/fenrirserver.com/public_html/config.inc.php
+echo "\$cfg['Servers'][\$i]['AllowNoPassword'] = false;" >> /home/admin/web/fenrirserver.com/public_html/config.inc.php
+echo "\$cfg['Servers'][\$i]['auth_type']     = 'cookie';" >> /home/admin/web/fenrirserver.com/public_html/config.inc.php
+chown -R www-data:www-data /home/admin/web/fenrirserver.com/public_html
+chmod 0660 /home/admin/web/fenrirserver.com/public_html/config.inc.php
 echo ""
 
 
@@ -297,44 +297,44 @@ echo ""
 echo "${BLUE}Step 16/${STEPS}:${NC} Creating Full Downloadable Client"
 echo "This step will take a few minutes.. please be patient"
 echo "${YELLOW}Skipping....${NC}"
-mkdir -p /home/admin/web/fenrirserver.com/public.html/downloads/
-cd /home/admin/web/fenrirserver.com/public.html/downloads/
+mkdir -p /home/admin/web/fenrirserver.com/public_html/downloads/
+cd /home/admin/web/fenrirserver.com/public_html/downloads/
 wget -q ${URL_FULLCLIENT}
 unzip -qq client.zip
 rm client.zip
-mkdir -p /home/admin/web/fenrirserver.com/public.html/downloads/client/data/
-echo "<?xml version=\"1.0\" encoding=\"euc-kr\" ?>" >> /home/admin/web/fenrirserver.com/public.html/client/data/clientinfo.xml
-echo "<clientinfo>" >> /home/admin/web/fenrirserver.com/public.html/downloads/client/data/clientinfo.xml
-echo "	<desc>Ragnarok Client Information</desc>" >> /home/admin/web/fenrirserver.com/public.html/downloads/client/data/clientinfo.xml
-echo "	<servicetype>korea</servicetype>" >> /home/admin/web/fenrirserver.com/public.html/downloads/client/data/clientinfo.xml
-echo "	<servertype>primary</servertype>" >> /home/admin/web/fenrirserver.com/public.html/downloads/client/data/clientinfo.xml
-echo "	<connection>" >> /home/admin/web/fenrirserver.com/public.html/downloads/client/data/clientinfo.xml
-echo "		<display>Ragnarok Online</display>" >> /home/admin/web/fenrirserver.com/public.html/downloads/client/data/clientinfo.xml
-echo "      		<address>${SERVER_IP}</address>" >> /home/admin/web/fenrirserver.com/public.html/downloads/client/data/clientinfo.xml
-echo "      		<port>6900</port>" >> /home/admin/web/fenrirserver.com/public.html/downloads/client/data/clientinfo.xml
-echo "      		<version>55</version>" >> /home/admin/web/fenrirserver.com/public.html/downloads/client/data/clientinfo.xml
-echo "      		<langtype>1</langtype>" >> /home/admin/web/fenrirserver.com/public.html/downloads/client/data/clientinfo.xml
-echo "		<loading>" >> /home/admin/web/fenrirserver.com/public.html/downloads/client/data/clientinfo.xml
-echo "			<image>loading00.jpg</image>" >> /home/admin/web/fenrirserver.com/public.html/downloads/client/data/clientinfo.xml
-echo "			<image>loading01.jpg</image>" >> /home/admin/web/fenrirserver.com/public.html/downloads/client/data/clientinfo.xml
-echo "		</loading>" >> /home/admin/web/fenrirserver.com/public.html/downloads/client/data/clientinfo.xml
-echo "		<aid>" >> /home/admin/web/fenrirserver.com/public.html/downloads/client/data/clientinfo.xml
-echo "			<admin>2000000</admin>" >> /home/admin/web/fenrirserver.com/public.html/downloads/client/data/clientinfo.xml
-echo "		</aid>" >> /home/admin/web/fenrirserver.com/public.html/downloads/client/data/clientinfo.xml
-echo "   	</connection>" >> /home/admin/web/fenrirserver.com/public.html/downloads/client/data/clientinfo.xml
-echo "</clientinfo>" >> /home/admin/web/fenrirserver.com/public.html/downloads/client/data/clientinfo.xml
-cd /home/admin/web/fenrirserver.com/public.html/downloads/client/
+mkdir -p /home/admin/web/fenrirserver.com/public_html/downloads/client/data/
+echo "<?xml version=\"1.0\" encoding=\"euc-kr\" ?>" >> /home/admin/web/fenrirserver.com/public_html/client/data/clientinfo.xml
+echo "<clientinfo>" >> /home/admin/web/fenrirserver.com/public_html/downloads/client/data/clientinfo.xml
+echo "	<desc>Ragnarok Client Information</desc>" >> /home/admin/web/fenrirserver.com/public_html/downloads/client/data/clientinfo.xml
+echo "	<servicetype>korea</servicetype>" >> /home/admin/web/fenrirserver.com/public_html/downloads/client/data/clientinfo.xml
+echo "	<servertype>primary</servertype>" >> /home/admin/web/fenrirserver.com/public_html/downloads/client/data/clientinfo.xml
+echo "	<connection>" >> /home/admin/web/fenrirserver.com/public_html/downloads/client/data/clientinfo.xml
+echo "		<display>Ragnarok Online</display>" >> /home/admin/web/fenrirserver.com/public_html/downloads/client/data/clientinfo.xml
+echo "      		<address>${SERVER_IP}</address>" >> /home/admin/web/fenrirserver.com/public_html/downloads/client/data/clientinfo.xml
+echo "      		<port>6900</port>" >> /home/admin/web/fenrirserver.com/public_html/downloads/client/data/clientinfo.xml
+echo "      		<version>55</version>" >> /home/admin/web/fenrirserver.com/public_html/downloads/client/data/clientinfo.xml
+echo "      		<langtype>1</langtype>" >> /home/admin/web/fenrirserver.com/public_html/downloads/client/data/clientinfo.xml
+echo "		<loading>" >> /home/admin/web/fenrirserver.com/public_html/downloads/client/data/clientinfo.xml
+echo "			<image>loading00.jpg</image>" >> /home/admin/web/fenrirserver.com/public_html/downloads/client/data/clientinfo.xml
+echo "			<image>loading01.jpg</image>" >> /home/admin/web/fenrirserver.com/public_html/downloads/client/data/clientinfo.xml
+echo "		</loading>" >> /home/admin/web/fenrirserver.com/public_html/downloads/client/data/clientinfo.xml
+echo "		<aid>" >> /home/admin/web/fenrirserver.com/public_html/downloads/client/data/clientinfo.xml
+echo "			<admin>2000000</admin>" >> /home/admin/web/fenrirserver.com/public_html/downloads/client/data/clientinfo.xml
+echo "		</aid>" >> /home/admin/web/fenrirserver.com/public_html/downloads/client/data/clientinfo.xml
+echo "   	</connection>" >> /home/admin/web/fenrirserver.com/public_html/downloads/client/data/clientinfo.xml
+echo "</clientinfo>" >> /home/admin/web/fenrirserver.com/public_html/downloads/client/data/clientinfo.xml
+cd /home/admin/web/fenrirserver.com/public_html/downloads/client/
 #wget -q https://<url>/fenrirmachine_scripts/roclient.exe
 
 # use rsu.pack to create client grf
 
-cd /home/admin/web/fenrirserver.com/public.html/downloads/
+cd /home/admin/web/fenrirserver.com/public_html/downloads/
 zip -qqrm fullclient.zip client
-cd /home/admin/web/fenrirserver.com/public.html/downloads/
+cd /home/admin/web/fenrirserver.com/public_html/downloads/
 rm -rf client/
-cd /home/admin/web/fenrirserver.com/public.html/data/schemas/logindb/
+cd /home/admin/web/fenrirserver.com/public_html/data/schemas/logindb/
 wget -q https://raw.githubusercontent.com/gamingmagic/unattended-installer/master/cp_cmspages.20170808161901.sql
-chown -R www-data:www-data /home/admin/web/fenrirserver.com/public.html
+chown -R www-data:www-data /home/admin/web/fenrirserver.com/public_html
 cd /home/
 
 
