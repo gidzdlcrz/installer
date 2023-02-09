@@ -38,10 +38,15 @@ echo "This script will now begin to install stuff on your system. Please be pati
 
 
 
-#echo "${BLUE}Step 1/${STEPS}:${NC} Updating your OS"
-#apt-get -qy update > /dev/null
-#apt-get -qy upgrade > /dev/null
-#echo ""
+echo "${BLUE}Step 1/${STEPS}:${NC} Updating your OS"
+apt-get -qy update > /dev/null
+apt-get -qy upgrade > /dev/null
+echo ""
+
+apt-get install xfonts-base
+apt-get install xfonts-100dpi 
+apt-get install xfonts-75dpi
+apt-get install dbus-x11
 
 
 
