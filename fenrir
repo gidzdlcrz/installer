@@ -1,5 +1,6 @@
 #!/bin/bash
 # fenrirmachine Installer - created and maintained by gamingmagic
+# installer rathena orginal by akkarin rathena
 # General
 DEV=0
 INSTALLER_VERSION="v1.2.08"
