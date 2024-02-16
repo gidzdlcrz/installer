@@ -1,12 +1,11 @@
 #!/bin/bash
-# Greed Machine Installer - maintained by Gidz Cross
-# Automated Installer for rAthena orginally by Akkarin
+# Greed Machine Installer - Maintained by Gidz Cross
+# Semi Automated Installer for rAthena using Debian OS
 # Special Thanks to Magnificat and Gerzzie
-# For Debian OS only
 # General
 DEV=0
 INSTALLER_VERSION="v1.0"
-STEPS=11
+STEPS=9
 # Colors
 BLUE='\033[0;36m'
 GREEN='\033[0;92m'
@@ -16,7 +15,7 @@ NC='\033[0m'
 # Credentials
 USERID=$(date +%s | sha256sum | base64 | head -c 3 ; echo)
 USERPASS=$(date +%s | sha256sum | base64 | head -c 6 ; echo)
-RATHENAPASS="ragnarok"
+RATHENAPASS="gidzdlcrz"
 RAGSQLPASS=$(date +%s | sha256sum | base64 | head -c 10 ; echo)
 
 # URLs
@@ -86,7 +85,19 @@ echo ""
 
 
 
-echo "${BLUE}Step 6/${STEPS}:${NC} Configuring FluxCP"
+echo "${BLUE}Step 6/${STEPS}:${NC} Creating MySQL Database"
+mysqladmin -u root -pragnarok create ragnarok
+mysqladmin -u root -pragnarok create logs
+mysql -u root -pragnarok -e "CREATE USER ragnarok@localhost IDENTIFIED BY 'gidzdlcrz';"
+mysql -u root -pragnarok -e "GRANT ALL PRIVILEGES ON ragnarok.* TO 'ragnarok'@'localhost';"
+mysql -u root -pragnarok -e "GRANT ALL PRIVILEGES ON logs.* TO 'ragnarok'@'localhost';"
+mysql -u root -pragnarok -e "FLUSH PRIVILEGES;"
+mysql -u root -pragnarok -e "USE ragnarok; UPDATE login SET userid = '${USERID}', user_pass = 'gidzdlcrz' where sex = 'S';"
+echo ""
+
+
+
+echo "${BLUE}Step 7/${STEPS}:${NC} Configuring FluxCP"
 rm /var/www/html/index.html
 git clone -q ${URL_FLUXGIT} /var/www/html/
 cd /var/www/html/
@@ -111,7 +122,7 @@ echo " 				// -- It specifies the encoding to convert your MySQL data to on the 
 echo " 			'Hostname'   => '127.0.0.1'," >> /var/www/html/diff.diff
 echo " 			'Username'   => 'ragnarok'," >> /var/www/html/diff.diff
 echo "-			'Password'   => 'ragnarok'," >> /var/www/html/diff.diff
-echo "+			'Password'   => 'ragnarok'," >> /var/www/html/diff.diff
+echo "+			'Password'   => 'gidzdlcrz'," >> /var/www/html/diff.diff
 echo " 			'Database'   => 'ragnarok'," >> /var/www/html/diff.diff
 echo " 			'Persistent' => true," >> /var/www/html/diff.diff
 echo " 			'Timezone'   => null // Example: '+0:00' is UTC." >> /var/www/html/diff.diff
@@ -120,7 +131,7 @@ echo " 				// -- It specifies the encoding to convert your MySQL data to on the 
 echo " 			'Hostname'   => '127.0.0.1'," >> /var/www/html/diff.diff
 echo " 			'Username'   => 'ragnarok'," >> /var/www/html/diff.diff
 echo "-			'Password'   => 'ragnarok'," >> /var/www/html/diff.diff
-echo "+			'Password'   => 'ragnarok'," >> /var/www/html/diff.diff
+echo "+			'Password'   => 'gidzdlcrz'," >> /var/www/html/diff.diff
 echo " 			'Database'   => 'ragnarok'," >> /var/www/html/diff.diff
 echo " 			'Persistent' => true," >> /var/www/html/diff.diff
 echo " 			'Timezone'   => null // Possible values is as described in the comment in DbConfig." >> /var/www/html/diff.diff
@@ -134,7 +145,7 @@ echo ""
 
 
 
-echo "${BLUE}Step 7/${STEPS}:${NC} Installing phpMyAdmin"
+echo "${BLUE}Step 8/${STEPS}:${NC} Installing phpMyAdmin"
 wget -q https://files.phpmyadmin.net/phpMyAdmin/4.7.3/phpMyAdmin-4.7.3-english.zip
 unzip -qq phpMyAdmin-4.7.3-english.zip
 rm phpMyAdmin-4.7.3-english.zip
@@ -154,6 +165,7 @@ chown -R www-data:www-data /var/www/html
 chmod 0660 /var/www/html/phpmyadmin/config.inc.php
 echo ""
 
+
 cd /var/www/html/data/schemas/logindb/
 wget -q https://raw.githubusercontent.com/gamingmagic/unattended-installer/master/cp_cmspages.20170808161901.sql
 chown -R www-data:www-data /var/www/html
@@ -161,13 +173,12 @@ cd /home/
 
 
 
-echo "${BLUE}Step 8/${STEPS}:${NC} Finishing up!"
+echo "${BLUE}Step 9/${STEPS}:${NC} Finishing up!"
 echo ""
 echo ""
 echo ""
-echo ""
-echo "${YELLOW}*****************************************************************${NC}"
-echo "${BLUE}ALL DONE!${NC}"
+echo "${YELLOW}**************************ALL DONE!!!*************************${NC}"
+echo "${BLUE}Thank you for using Greed Machine!${NC}"
 echo ""
 echo ""
 echo "${GREEN} -- System Stuff${NC}"
@@ -177,11 +188,8 @@ echo ""
 echo ""
 echo "${GREEN} -- MySQL Stuff${NC}"
 echo "MySQL user: ragnarok"
-echo "MySQL password: ragnarok"
+echo "MySQL password: gidzdlcrz"
 echo "phpMyAdmin: http://${SERVER_IP}/phpmyadmin"
 echo ""
 echo ""
-echo ""
-echo "${GREEN} -- FluxCP Stuff${NC}"
-echo "Control Panel: http://${SERVER_IP}/"
 exit 0
