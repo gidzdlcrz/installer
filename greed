@@ -43,15 +43,11 @@ echo "${BLUE}Step 1/${STEPS}:${NC} Updating your OS"
 apt-get -qy update > /dev/null
 apt-get -qy upgrade > /dev/null
 echo ""
-echo "Success!"
-echo ""
 
 
 
 echo "${BLUE}Step 2/${STEPS}:${NC} Installing Prerequisites"
 apt-get -qy install expect wget sudo > /dev/null
-echo ""
-echo "Success!"
 echo ""
 
 
@@ -70,12 +66,12 @@ rm msi.sh
 
 
 
-echo ""
 echo "${BLUE}Step 4/${STEPS}:${NC} Installing Apache2 & PHP"
 echo " * Installing Apache2"
 apt-get -qy install apache2 > /dev/null
 echo " * Installing PHP"
 apt-get -qy install libapache2-mod-php php-mysql php-gd php-mbstring php-xml > /dev/null
+apt-get install php-curl
 systemctl restart apache2
 echo ""
 
@@ -87,7 +83,6 @@ apt-get -qy install git make libmariadb-dev libmariadbclient-dev libmariadbclien
 echo " * Installing Utilities"
 apt-get -qy install zlib1g-dev libpcre3-dev nano zip unzip zenity gcc g++ > /dev/null
 echo ""
-echo "Success!"
 
 
 
@@ -98,8 +93,7 @@ mysql -u root -pragnarok -e "CREATE USER ragnarok@localhost IDENTIFIED BY 'gidzd
 mysql -u root -pragnarok -e "GRANT ALL PRIVILEGES ON ragnarok.* TO 'ragnarok'@'localhost';"
 mysql -u root -pragnarok -e "GRANT ALL PRIVILEGES ON logs.* TO 'ragnarok'@'localhost';"
 mysql -u root -pragnarok -e "FLUSH PRIVILEGES;"
-echo ""
-echo "Success!"
+mysql -u root -pragnarok -e "USE ragnarok; UPDATE login SET userid = '${USERID}', user_pass = 'gidzdlcrz' where sex = 'S';"
 echo ""
 
 
@@ -144,10 +138,10 @@ echo " 			'Persistent' => true," >> /var/www/html/diff.diff
 echo " 			'Timezone'   => null // Possible values is as described in the comment in DbConfig." >> /var/www/html/diff.diff
 git apply diff.diff
 rm /var/www/html/diff.diff
+usermod -a -G www-data rathena
 chown -R www-data:www-data /var/www/html
 chmod -R 0774 /var/www/html
-echo ""
-echo "Success!"
+ln -s /var/www/html /home/rathena/Desktop/FluxCP
 echo ""
 
 
@@ -170,8 +164,6 @@ echo "\$cfg['Servers'][\$i]['AllowNoPassword'] = false;" >> /var/www/html/phpmya
 echo "\$cfg['Servers'][\$i]['auth_type']     = 'cookie';" >> /var/www/html/phpmyadmin/config.inc.php
 chown -R www-data:www-data /var/www/html
 chmod 0660 /var/www/html/phpmyadmin/config.inc.php
-echo ""
-echo "Success!"
 echo ""
 
 
